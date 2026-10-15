@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Kinh Trường A-Hàm | Tổng Hợp Câu 1 & Câu 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --card-bg: rgba(18, 24, 48, 0.75);
+            --card-border: rgba(0, 229, 255, 0.2);
+            --accent-cyan: #00e5ff;
+            --accent-gold: #ffd700;
+            --accent-purple: #b388ff;
+            --accent-red: #ff5252;
+            --accent-green: #69f0ae;
+            --text-main: #e2e8f0;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: radial-gradient(ellipse at center, #13172e 0%, #05060c 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 20px 15px;
+            line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hiệu ứng Nền Vũ Trụ Starfield & Tinh Vân */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(179, 136, 255, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 229, 255, 0.12), transparent 40%),
+                radial-gradient(1px 1px at 40px 60px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 150px 300px, #00e5ff, transparent),
+                radial-gradient(2px 2px at 400px 150px, #ffd700, transparent),
+                radial-gradient(1px 1px at 600px 450px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 800px 200px, #b388ff, transparent);
+            background-size: 100% 100%, 100% 100%, 550px 550px, 550px 550px, 550px 550px, 550px 550px, 550px 550px;
+            opacity: 0.8;
+            animation: spaceGlow 90s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes spaceGlow {
+            from { transform: translateY(0); }
+            to { transform: translateY(-550px); }
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Header Portal Title */
+        .portal-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+        }
+
+        .portal-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2em;
+            background: linear-gradient(135deg, #00e5ff, #ffd700, #b388ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .portal-header p {
+            color: var(--text-sub);
+            font-size: 0.95em;
+        }
+
+        /* Navigation Tab Bar */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(179, 136, 255, 0.2));
+            border-color: var(--accent-cyan);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        }
+
+        /* Tab Content Control */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Question Banner Card */
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .badge-c1 {
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+        }
+
+        .badge-c2 {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+        }
+
+        .question-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35em;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: border-color 0.3s;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 229, 255, 0.4);
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2em;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 229, 255, 0.2);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2.gold { color: var(--accent-gold); border-bottom-color: rgba(255, 215, 0, 0.2); }
+        h2.red { color: var(--accent-red); border-bottom-color: rgba(255, 82, 82, 0.2); }
+        h2.green { color: var(--accent-green); border-bottom-color: rgba(105, 240, 174, 0.2); }
+
+        h3 {
+            color: var(--accent-gold);
+            font-size: 1.05em;
+            margin: 16px 0 10px 0;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .box-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .box-item strong {
+            color: var(--accent-gold);
+        }
+
+        /* Callout / Highlight Box */
+        .highlight-box {
+            background: rgba(179, 136, 255, 0.1);
+            border-left: 4px solid var(--accent-purple);
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 15px 0;
+        }
+
+        /* Pie Chart / Four Allocation Box */
+        .pie-chart-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .pie-card {
+            flex: 1;
+            min-width: 220px;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+            border-top: 4px solid var(--accent-cyan);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pie-card .percent {
+            font-size: 1.9em;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 5px;
+        }
+
+        /* Lists */
+        ul { list-style: none; padding-left: 0; }
+        li { position: relative; padding-left: 22px; margin-bottom: 10px; }
+        li::before { content: "✦"; position: absolute; left: 0; color: var(--accent-purple); }
+
+        /* Accordion Collapsible for Quick Self-Testing */
+        details {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            padding: 12px 16px;
+        }
+
+        details summary {
+            font-weight: 700;
+            color: var(--accent-cyan);
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+        }
+
+        details[open] summary {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px 0;
+            color: var(--text-sub);
+            font-size: 0.85em;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Portal Header -->
+        <header class="portal-header">
+            <h1>🌌 ĐỀ CƯƠNG ÔN TẬP KINH TRƯỜNG A-HÀM</h1>
+            <p>Hệ Thống Kiến Thức Trọng Tâm • Giao Diện Tối Ưu Cho Học Tập & Ghi Nhớ</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('all')">✨ Tất Cả Nội Dung</button>
+            <button class="tab-btn" onclick="switchTab('cau1')">📘 Câu 1: Sáu Phương & AI</button>
+            <button class="tab-btn" onclick="switchTab('cau2')">📙 Câu 2: Quản Lý Tài Sản</button>
+        </nav>
+
+        <!-- ==================== CÂU 1 CONTENT ==================== -->
+        <div id="tab-cau1" class="tab-content active">
+            <div class="question-card">
+                <span class="badge badge-c1">CÂU 1 - KINH THIỆN SINH</span>
+                <h2 class="question-title">
+                    Hơn 25 thế kỷ đã trôi qua, tinh thần Sáu phương trong Kinh Thiện Sinh vẫn mang giá trị thiết thực. 
+                    Trong thời đại số, Tăng Ni và Phật tử cần ứng dụng công nghệ/AI như thế nào để vừa bảo đảm tính tỉnh thức, nhân văn, hướng thiện, vừa phát huy giá trị đạo đức trong mối quan hệ giữa người với người?
+                </h2>
+            </div>
+
+            <!-- Section 1.1 -->
+            <div class="section-card">
+                <h2>1. Tinh Thần Sáu Phương Trong Kinh Thiện Sinh</h2>
+                <p>Đức Phật biến nghi lễ đảnh lễ 6 hướng không gian của chàng thanh niên Thiện Sinh thành <strong>hệ thống đạo đức ứng xử 2 chiều</strong> trong xã hội:</p>
+                <div class="grid-2">
+                    <div class="box-item">
+                        <strong>Phương Đông (Cha mẹ ↔ Con cái):</strong> Con hiếu kính phụng dưỡng; Cha mẹ ngăn ác, dạy điều lành, lo tương lai.
+                    </div>
+                    <div class="box-item">
+                        <strong>Phương Nam (Thầy ↔ Trò):</strong> Trò kính lễ, siêng học; Thầy truyền tri thức, dạy có phương pháp.
+                    </div>
+                    <div class="box-item">
+                        <strong>Phương Tây (Vợ ↔ Chồng):</strong> Chồng tôn trọng, chung thủy; Vợ hòa nhã, kính thuận, gìn giữ gia đình.
+                    </div>
+                    <div class="box-item">
+                        <strong>Phương Bắc (Bạn bè ↔ Bản thân):</strong> Tình bạn chân thành, che chở, tương trợ lúc khó khăn.
+                    </div>
+                    <div class="box-item">
+                        <strong>Phương Dưới (Chủ ↔ Người làm):</strong> Chủ đối xử tử tế, trả công công bằng; Người làm cẩn thận, trung thực.
+                    </div>
+                    <div class="box-item">
+                        <strong>Phương Trên (Tăng Ni ↔ Cư sĩ):</strong> Cư sĩ cúng dường kính Tam Bảo; Tăng Ni dạy tâm lành, chỉ đường an lạc.
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    💡 <strong>Tư tưởng cốt lõi:</strong> Chuyển từ câu hỏi <em>"Người khác phải làm gì cho tôi?"</em> sang <em>"Tôi phải làm gì cho người khác?"</em>.
+                </div>
+            </div>
+
+            <!-- Section 1.2 -->
+            <div class="section-card">
+                <h2>2. Nhận Diện Bối Cảnh Thời Đại Số</h2>
+                <ul>
+                    <li><strong>Cơ hội:</strong> Mở ra khả năng tiếp cận tri thức siêu tốc, lan tỏa Chánh pháp, kết nối thiện nguyện minh bạch.</li>
+                    <li><strong>Thách thức:</strong> Kết nối nhiều hơn nhưng chưa chắc thấu hiểu hơn; Tiếp nhận nhiều thông tin hơn nhưng thiếu trí tuệ; Ngồi chung bàn ăn nhưng mỗi người đắm chìm vào màn hình riêng gây vô cảm.</li>
+                </ul>
+            </div>
+
+            <!-- Section 1.3 -->
+            <div class="section-card">
+                <h2>3. Ba Nguyên Tắc Ứng Dụng Công Nghệ & AI</h2>
+                
+                <h3>A. Tỉnh Thức (Chánh niệm thời đại số)</h3>
+                <ul>
+                    <li><strong>Tự vấn Chánh niệm:</strong> Tự hỏi trước khi bấm/đăng/bình luận: "Thông tin này đã kiểm chứng chưa?", "Bình luận này có làm tổn thương ai không?".</li>
+                    <li><strong>Không không gian màn hình:</strong> Dành sự chú tâm trọn vẹn và lắng nghe chân thành khi giao tiếp thực tế.</li>
+                </ul>
+
+                <h3>B. Nhân Văn (Con người làm trung tâm)</h3>
+                <ul>
+                    <li><strong>Tôn trọng phẩm giá:</strong> Không bắt nạt, miệt thị hay khai thác nỗi đau người khác để câu view.</li>
+                    <li><strong>Tôn trọng sự thật:</strong> Không cắt ghép, phát tán tin giả.</li>
+                    <li><strong>Tôn trọng riêng tư:</strong> Không tự ý đăng tải ảnh/tin nhắn riêng tư của người khác.</li>
+                </ul>
+
+                <h3>C. Hướng Thiện & 5 Nguyên Tắc Dùng AI Có Trách Nhiệm</h3>
+                <div class="grid-2">
+                    <div class="box-item">1. AI hỗ trợ, con người chịu trách nhiệm (tự kiểm chứng kết quả).</div>
+                    <div class="box-item">2. Đối chiếu cẩn trọng kinh điển và nguồn trích dẫn.</div>
+                    <div class="box-item">3. Trung thực học thuật, không nhận sản phẩm AI làm của riêng.</div>
+                    <div class="box-item">4. Bảo vệ dữ liệu riêng tư, không đưa hồ sơ nhạy cảm vào AI.</div>
+                    <div class="box-item" style="grid-column: span 2;">5. Lấy lợi ích con người và phụng sự xã hội làm trọng tâm.</div>
+                </div>
+            </div>
+
+            <!-- Section 1.4 -->
+            <div class="section-card">
+                <h2>4. Năm Thực Hành Đạo Đức Số</h2>
+                <div class="grid-2">
+                    <div class="box-item"><strong>1. Kiểm chứng:</strong> Xác định nguồn tin trước khi chia sẻ.</div>
+                    <div class="box-item"><strong>2. Tôn trọng:</strong> Không miệt thị cá nhân dù bất đồng ý kiến.</div>
+                    <div class="box-item"><strong>3. Suy xét AI:</strong> Kiểm tra kết quả và chịu trách nhiệm sản phẩm công bố.</div>
+                    <div class="box-item"><strong>4. Bảo vệ riêng tư:</strong> Xin phép trước khi đăng ảnh/chuyện riêng tư.</div>
+                    <div class="box-item" style="grid-column: span 2;"><strong>5. Chia sẻ tạo lợi ích:</strong> Ưu tiên nội dung có tính giáo dục và khơi dậy từ bi.</div>
+                </div>
+            </div>
+
+            <div class="section-card" style="border-color: var(--accent-gold);">
+                <h2 class="gold">📌 THÔNG ĐIỆP KẾT LUẬN CÂU 1</h2>
+                <p style="text-align: center; font-size: 1.1em; color: var(--accent-gold); font-weight: 600;">
+                    "Công nghệ có thể kết nối muôn nơi, nhưng đạo đức mới giúp con người gần nhau."
+                </p>
+                <p style="text-align: center; margin-top: 10px; font-weight: 700;">
+                    TIẾN TRÌNH: HỌC (để hiểu) ➔ HIỂU (để hành) ➔ HÀNH (để chuyển hóa) ➔ CHUYỂN HÓA (để phụng sự)
+                </p>
+            </div>
+        </div>
+
+        <!-- ==================== CÂU 2 CONTENT ==================== -->
+        <div id="tab-cau2" class="tab-content active">
+            <div class="question-card">
+                <span class="badge badge-c2">CÂU 2 - KINH THIỆN SINH</span>
+                <h2 class="question-title">
+                    Định hướng của Đức Phật về việc tạo lập và quản lý tài sản dưới góc nhìn Kinh Thiện Sinh: 
+                    Phân tích & chứng minh qua 2 nội dung: (1) Làm giàu bất hợp pháp; (2) Làm giàu đúng pháp.
+                </h2>
+            </div>
+
+            <!-- Section 2.1 -->
+            <div class="section-card">
+                <h2 class="red">I. LÀM GIÀU BẤT HỢP PHÁP</h2>
+                
+                <h3>1. Phương diện Kinh điển</h3>
+                <p><strong>Bốn nguyên nhân làm ác:</strong> Tham dục, Sân hận, Si mê, Sợ hãi.</p>
+                <p style="margin-top:10px;"><strong>Sáu nguyên nhân làm tiêu hao tài sản:</strong></p>
+                <div class="grid-2">
+                    <div class="box-item">1. Đam đam các chất gây say (rượu, ma túy).</div>
+                    <div class="box-item">2. Lang thang đường phố phi thời.</div>
+                    <div class="box-item">3. Đam mê hội hè, giải trí quá mức.</div>
+                    <div class="box-item">4. Đam đam cờ bạc may rủi.</div>
+                    <div class="box-item">5. Giao du với bạn xấu (4 hạng bạn giả dối).</div>
+                    <div class="box-item">6. Thói quen lười biếng, né tránh công việc.</div>
+                </div>
+
+                <details style="margin-top: 15px;">
+                    <summary>🔍 Chi tiết 4 Hạng Bạn Giả Dối (Oan gia giả thân cận)</summary>
+                    <ul>
+                        <li><strong>Úy phục:</strong> Cho ít mong trả nhiều.</li>
+                        <li><strong>Mỹ ngôn:</strong> Nịnh hót, gặp nạn xa lánh.</li>
+                        <li><strong>Kính thuận:</strong> Dối trá, thấy lỗi nhỏ vội trách phạt.</li>
+                        <li><strong>Ác hữu:</strong> Rủ rê cờ bạc, rượu chè, phá hoại cuộc sống.</li>
+                    </ul>
+                </details>
+
+                <h3>2. Biểu hiện thực tế trong thời đại số</h3>
+                <ul>
+                    <li>Lừa đảo đầu tư trực tuyến, thao túng tài chính, chiếm đoạt tài sản qua mạng.</li>
+                    <li>Lạm dụng AI giả mạo hình ảnh, giọng nói người thân để lừa tiền.</li>
+                    <li>Gian lận thương mại, bán hàng giả (thuốc, sữa) & quảng cáo sai sự thật.</li>
+                    <li>Lôi kéo vào sòng bài trực tuyến hoặc mô hình đa cấp biến tướng.</li>
+                </ul>
+            </div>
+
+            <!-- Section 2.2 -->
+            <div class="section-card">
+                <h2 class="green">II. LÀM GIÀU ĐÚNG PHÁP & NGHỆ THUẬT QUẢN LÝ TÀI SẢN</h2>
+
+                <h3>1. Bốn Nguồn Lực Thịnh Vượng</h3>
+                <div class="grid-2">
+                    <div class="box-item"><strong>Thế Cần:</strong> Siêng năng, thuần thục, thiện xảo trong nghề nghiệp.</div>
+                    <div class="box-item"><strong>Thế Thủ:</strong> Khéo léo bảo vệ thành quả, quản trị rủi ro.</div>
+                    <div class="box-item"><strong>Thân Cận Thiện Hữu:</strong> Kết giao, hợp tác với đối tác có đạo đức.</div>
+                    <div class="box-item"><strong>Sống Điều Độ:</strong> Cân bằng thu chi, không phung phí cũng không keo kiệt.</div>
+                </div>
+
+                <h3>2. Chiến Lược Tài Chính "TỨ PHÂN PHÁP" (Kinh Thiện Sinh)</h3>
+                <p>Đức Phật đưa ra công thức phân bổ tài sản thành 4 phần khoa học (tỷ lệ 1/4 - 2/4 - 1/4):</p>
+                <div class="pie-chart-box">
+                    <div class="pie-card" style="border-top-color: #00e5ff;">
+                        <div class="percent">25% (1/4)</div>
+                        <strong>Chi Dùng Đời Sống</strong>
+                        <p style="font-size: 0.85em; color: var(--text-sub); margin-top:5px;">Trang trải sinh hoạt gia đình & phụng dưỡng cha mẹ.</p>
+                    </div>
+                    <div class="pie-card" style="border-top-color: #ffd700;">
+                        <div class="percent">50% (2/4)</div>
+                        <strong>Tái Đầu Tư Kinh Doanh</strong>
+                        <p style="font-size: 0.85em; color: var(--text-sub); margin-top:5px;">Mở rộng sản xuất, nâng cao năng lực & tạo việc làm.</p>
+                    </div>
+                    <div class="pie-card" style="border-top-color: #b388ff;">
+                        <div class="percent">25% (1/4)</div>
+                        <strong>Dự Phòng & Thiện Nguyện</strong>
+                        <p style="font-size: 0.85em; color: var(--text-sub); margin-top:5px;">Dự phòng rủi ro/bệnh tật; cúng dường & giúp đỡ xã hội.</p>
+                    </div>
+                </div>
+
+                <h3>3. Hai Ẩn Dụ Minh Triết</h3>
+                <div class="grid-2">
+                    <div class="box-item">
+                        <strong style="color:var(--accent-gold);">🐝 Con Ong Hút Mật:</strong>
+                        <p style="font-size: 0.9em; margin-top: 5px;">Hút nhụy làm mật nhưng không làm tổn hại sắc và hương của hoa. ➔ Kinh doanh có lợi nhuận nhưng không gây tổn hại môi trường, đạo đức hay sức khỏe cộng đồng.</p>
+                    </div>
+                    <div class="box-item">
+                        <strong style="color:var(--accent-gold);">🐜 Ụ Mối Đùn Cao:</strong>
+                        <p style="font-size: 0.9em; margin-top: 5px;">Tha từng hạt đất nhỏ kiên trì để xây nên đùn mối to lớn. ➔ Tích lũy tài sản bền vững dài hạn, tránh tâm lý nôn nóng muốn làm giàu xổi.</p>
+                    </div>
+                </div>
+
+                <h3>4. Ứng Dụng Quản Lý Tài Chính Thời Kỷ Nguyên Số</h3>
+                <ul>
+                    <li>1. Tạo thu nhập bằng giá trị thực, sử dụng AI trung thực.</li>
+                    <li>2. Phân biệt rõ "nhu cầu thiết yếu" và "mong muốn nhất thời".</li>
+                    <li>3. Bảo mật mã OTP/mật khẩu ngân hàng, cảnh giác trước lời hứa lợi nhuận cao bất thường.</li>
+                    <li>4. Minh bạch ngân sách gia đình, ưu tiên giáo dục và chăm sóc sức khỏe.</li>
+                    <li>5. Chia sẻ tài sản bằng lòng từ và trí tuệ thông qua thiện nguyện tự nguyện, minh bạch.</li>
+                </ul>
+            </div>
+
+            <div class="section-card" style="border-color: var(--accent-gold);">
+                <h2 class="gold">📌 THÔNG ĐIỆP KẾT LUẬN CÂU 2</h2>
+                <p style="text-align: center; color: var(--accent-gold); font-size: 1.05em; font-weight: 600;">
+                    "Tiền bạc tự thân không có lỗi. Tiền bạc là người đầy tớ trung thành nhưng là người chủ tồi. Làm giàu đúng pháp là làm giàu cả vật chất lẫn đời sống tinh thần."
+                </p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            Tài liệu Ôn Tập Kinh Trường A-Hàm • Chúc bạn ôn tập tốt và đạt kết quả cao!
+        </footer>
+    </div>
+
+    <!-- JavaScript Chuyển Tab Đơn Giản -->
+    <script>
+        function switchTab(tabName) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            const tabs = document.querySelectorAll('.tab-content');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (tabName === 'all') {
+                event.target.classList.add('active');
+                tabs.forEach(tab => tab.classList.add('active'));
+            } else {
+                event.target.classList.add('active');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                document.getElementById('tab-' + tabName).classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
